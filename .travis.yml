@@ -1,24 +1,28 @@
 sudo: required
 dist: trusty
-language: "node_js"
+language: node_js
 addons:
   firefox: latest
   apt:
     sources:
-     - google-chrome
+    - google-chrome
     packages:
-     - google-chrome-stable fluxbox
+    - google-chrome-stable fluxbox
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - fluxbox >/dev/null 2>&1 &
-script: "echo 'Adding release'"
-before_deploy: 
-  - "google-chrome --pack-extension=pack/"
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- fluxbox >/dev/null 2>&1 &
+script: echo 'Adding release'
+before_deploy:
+- google-chrome --pack-extension=pack/
 deploy:
   provider: releases
-  api_key: "qG3SSZZhs11HSAehCAvx"
-  file: pack.crx 
+  api_key:
+    secure: "izylQ7NdsYWBZeI4f7stsxYyO4ZEnYqrqRs+QdBVIcgXR3PhmBzaGZV/RIs8M35drLl0SoxfzpejteP14SBNM9q0oA4N+nZjCu/jQKvYN8S8+lDV5G+2K2hisbN8IcBtvRm/3N2fPrrL0I3epR2Orp6k1yw121h5E0n30cnty5EULIRHOt3/Fa4G/Zy1tiwOYW83WwQEQJxMAQhcg1mRd1KoFx/S4KCr00v4S/3Z6DReqzYaqaIjwodmOqTw9yJ6ooC6aixEHEcdcgdEUi7T4RaRWA4vDELVNDMIXPwuZvQ9tdIx1/v2uxwHINopuoYeakBRUzriA17kUTSx9OEuvCD3yKbkf1snxoyIw5843YSrSEoZgsFjW1ekpAEGXJy9f9sdjks4swb7XZNhHWxDGkzZGTqLALRvoibIdRh9SKokiEVeHZlk8aH4rIAw8nRqyFvfYfpjaA33S+Dz3mPEywYL42v+kIAxyFJcF6V0bDgapezXB+4kJTWNcswlcESjk0krjkm+sV7mJjulVE3IriSq4yFGnSDDlJOfkfg2mT85UiQ9dIFxASrGt0EppP70FifdtY0JMZaE9IPdqXIPC+5lBWuVt4dkUzsi049XTJmeK9Dx4OzWsDIrXkQl7g7uAC1tXKd4G0A9vyq8W7g7IoR4VAXTQ5WNR23+WHNyFTU="
+  file: pack.crx
   skip_cleanup: true
   on:
     tags: true
+env:
+  global:
+    secure: X8goJM7pL7Li4QZ+FQBHx+Vnm5FV5+r8HT0NLh2KufwvTrwrflmoS4QGV26STHE56fXHwVOs5Q3uWQQ6GN7twSegGR9f0XdRBk7LQ9EfayqrxSmVOnR3HRlMmjnMmAnZ++XwH684BQm/GsVwy2BDM0iWZfY8yRDNRBzWz3Zw+tFSpj4CMoMmCESCfMiBFRhrRFG24KREBobUmeL7t0h0NV+TCPMrKmhiSHQTpdCJYN5MNUHI0AShypavGoM9nuZbA231nRLLUbU7TOIUko28lTS8Or+7CKpKmcoNsyn7ZcK1+wbnGsqdkZ4QW9POyTCUzZHuCG3Kg5aJTuuejQeQsHkXJsO7pRfREbXAICm0G+crg42wztTehtRh1rx9J9Jb0UT4LpdwwVmsaMtJkd69ENdft0L5iqDqpWVKE1HCuby108lHR44DVo2B2QqBpTlVWiRwQuPLYVrZPBlVAdp323v0mFQ7U3Jsh+ITswCMFQJrwOntE5/7lsUibc/B3boVv3Nw2Kv+CIGmnAfVPq0rMYTnCqxqLDzFzjob2jMQlZuNuMnJwSrQzEnfuo40UcZHkfDkoDkeprK6YulTch0LZqEI44kk/db1e7lmL90fmjSpeISIQKhBFKiHtHeGu6jyrsZlVOsjspagbogA/nYiBI/YQiic7EIjSXfrGMIMGhA=
