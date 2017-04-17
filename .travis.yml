@@ -1,7 +1,14 @@
-sudo: true
-before_install:
-  - sudo apt-get install google-chrome-stable
+sudo: required
+dist: trusty
 language: "node_js"
+before_install:  
+ - export CHROME_BIN=/usr/bin/google-chrome
+ - export DISPLAY=:99.0 
+ - sh -e /etc/init.d/xvfb start
+ - sudo apt-get update
+ - sudo apt-get install -y libappindicator1 fonts-liberation
+ - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+ - sudo dpkg -i google-chrome*.deb
 script: "echo 'Adding release'"
 before_deploy: 
   - "google-chrome --pack-extension=./"
