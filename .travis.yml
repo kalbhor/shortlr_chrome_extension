@@ -1,10 +1,25 @@
-sudo: true
+sudo: required
+dist: trusty
 language: "node_js"
+addons:
+  firefox: latest
+  apt:
+    sources:
+     - google-chrome
+    packages:
+     - google-chrome-stable fluxbox
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - fluxbox >/dev/null 2>&1 &
 script: "echo 'Adding release'"
+before_deploy: 
+  - "google-chrome --pack-extension=pack/"
+  - "./crxmake.sh pack/ pack.pem"
 deploy:
   provider: releases
-  api_key: # Add API key here
-  file_glob: "true"
+  api_key: "qG3SSZZhs11HSAehCAvx"
+  file: pack.crx 
   skip_cleanup: true
   on:
     tags: true
