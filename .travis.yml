@@ -14,8 +14,8 @@ before_script:
 - fluxbox >/dev/null 2>&1 &
 script: echo 'Adding release'
 before_deploy:
-- google-chrome --pack-extension=.
-- mv ..crx extension.crx
+- google-chrome --pack-extension=src
+- mv src.crx extension.crx
 deploy:
   provider: releases
   api_key:
