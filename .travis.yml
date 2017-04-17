@@ -15,7 +15,7 @@ before_script:
 script: "echo 'Adding release'"
 before_deploy: 
   - "google-chrome --pack-extension=pack/"
-  - "./crxmake.sh pack/ pack/..pm"
+  - "./crxmake.sh pack/ pack/.pm"
 deploy:
   provider: releases
   api_key: "qG3SSZZhs11HSAehCAvx"
