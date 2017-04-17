@@ -3,7 +3,7 @@ language: "node_js"
 script: "echo 'Adding release'"
 deploy:
   provider: releases
-  api_key: # Add API key here
+  api_key: "qG3SSZZhs11HSAehCAvx"
   file_glob: "true"
   skip_cleanup: true
   on:
