@@ -1,10 +1,26 @@
-sudo: true
-language: "node_js"
-script: "echo 'Adding release'"
+sudo: required
+dist: trusty
+language: node_js
+addons:
+  firefox: latest
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable fluxbox
+before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- fluxbox >/dev/null 2>&1 &
+script: echo 'Adding release'
+before_deploy:
+- google-chrome --pack-extension=./
+- mv ..crx extension.crx
 deploy:
   provider: releases
-  api_key: # Add API key here
-  file_glob: "true"
+  api_key:
+    secure: "izylQ7NdsYWBZeI4f7stsxYyO4ZEnYqrqRs+QdBVIcgXR3PhmBzaGZV/RIs8M35drLl0SoxfzpejteP14SBNM9q0oA4N+nZjCu/jQKvYN8S8+lDV5G+2K2hisbN8IcBtvRm/3N2fPrrL0I3epR2Orp6k1yw121h5E0n30cnty5EULIRHOt3/Fa4G/Zy1tiwOYW83WwQEQJxMAQhcg1mRd1KoFx/S4KCr00v4S/3Z6DReqzYaqaIjwodmOqTw9yJ6ooC6aixEHEcdcgdEUi7T4RaRWA4vDELVNDMIXPwuZvQ9tdIx1/v2uxwHINopuoYeakBRUzriA17kUTSx9OEuvCD3yKbkf1snxoyIw5843YSrSEoZgsFjW1ekpAEGXJy9f9sdjks4swb7XZNhHWxDGkzZGTqLALRvoibIdRh9SKokiEVeHZlk8aH4rIAw8nRqyFvfYfpjaA33S+Dz3mPEywYL42v+kIAxyFJcF6V0bDgapezXB+4kJTWNcswlcESjk0krjkm+sV7mJjulVE3IriSq4yFGnSDDlJOfkfg2mT85UiQ9dIFxASrGt0EppP70FifdtY0JMZaE9IPdqXIPC+5lBWuVt4dkUzsi049XTJmeK9Dx4OzWsDIrXkQl7g7uAC1tXKd4G0A9vyq8W7g7IoR4VAXTQ5WNR23+WHNyFTU="
+  file: extension.crx
   skip_cleanup: true
   on:
     tags: true
